@@ -1,1 +1,15 @@
 # UI-tests-Jetsnack
+
+This is a technical assignment carried out by Filip Thunberg.
+
+This repository includes UI tests for the Jetsnack Android Sample app. The tests were created in the Android Studio software, where the Jetsnack Sample was imported. The app ran on an emulator (Google Pixel 9), and the UI tests were created beside an example UI test, “AppTest” class (app/src/androidTest/java/com/example/jetsnack/AppTest.kt). The additional UI test created in this technical assignment is called “HealthySnackTest.kt”.
+
+The purpose of the additional UI tests is to determine whether the Jetsnack application can functionally execute certain tasks. This includes swiping vertically down on a page, and also horizontally on a specific category. Tests also include testing the search function by using free text and accessing a particular item.
+
+The UI test is called “app_canScrollAndSearch” and uses “createAndroidComposeRule<MainActivity>()” to launch the app in a test environment and simulate user interactions. The test’s responsibility is to cover all the points of the scenario. Each point is marked with 1, 2, 3, and 4 in the code. The first part simulates a user opening up the app and scrolling down to the “Newly Added” section. The second part swipes back and forth in the section. The third part navigates to the search tab and uses a free-text search to find mango. Lastly, the fourth part taps on the product and makes sure that the description is in place.
+
+Initially, I divided the testing into two UI tests because the first two and the last two parts did not depend on each other. The first two parts had to do with scrolling on the home screen, while the last two had to do with searching. Therefore, creating the tests separately made it easier to debug and find potential errors. However, writing all parts as one test involves the integration of multiple functions at once, ultimately making it a better option.
+
+When creating future tests, these can also be inside the “HealthySnackTest.kt” class, if it has to do with similar themes. Otherwise, it is possible to add more classes with tests and group them together in a suite class. I have added the class “AllTests.kt” in the repository, which runs the “HealthySnackTest.kt” and the example UI test “AppTest.kt” after one another.
+
+The tests did not encounter much flakiness. The main problem had to do with timing issues, which arose because of limitations in computational power. For instance, the UI did not always fully render in the search test before it tried clicking on the search tab. This led to flakiness. It often occurred when the emulator was started together with the testing, instead of on its own. It caused the emulator to be too slow to execute all the performances. To solve it, the emulator was powered on before the tests were executed. Another way to counter the timing issue would have been to wait for idle states with timeouts, but as the tests did not encounter flakiness when powering the emulator before running the tests, I did not include it.
